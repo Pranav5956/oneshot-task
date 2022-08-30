@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "server files",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node index.js",
-    "server-dev": "nodemon index.js"
+    "server": "node -r dotenv/config index.js",
+    "server-dev": "nodemon -r dotenv/config index.js",
+    "start": "npm run server",
+    "dev": "npm run server-dev"
   },
   "repository": {
     "type": "git",
