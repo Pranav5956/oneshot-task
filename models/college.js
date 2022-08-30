@@ -1,4 +1,4 @@
-import { Schema, model, trusted } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const college = Schema({
   name: { type: String, required: true },
