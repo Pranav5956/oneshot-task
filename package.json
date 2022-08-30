@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node index.js",
+    "server-dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pranav5956/oneshot-task.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "Pranav Balaji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pranav5956/oneshot-task/issues"
+  },
+  "homepage": "https://github.com/Pranav5956/oneshot-task#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "compute-cosine-similarity": "^1.0.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fastpriorityqueue": "^0.7.2",
+    "mongoose": "^6.5.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
