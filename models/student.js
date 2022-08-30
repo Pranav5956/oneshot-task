@@ -1,11 +1,11 @@
-import { Schema, model, Types } from "mongoose";
+import mongoose from "mongoose";
 
-const student = Schema({
+const student = mongoose.Schema({
   name: { type: String, required: true },
   yearOfBatch: { type: Date, required: true },
-  collegeId: { type: Types.ObjectId, ref: "College", required: true },
+  collegeId: { type: mongoose.Types.ObjectId, ref: "College", required: true },
   skills: { type: [String], required: true, default: [] },
 });
 
-const Student = model("Student", student);
+const Student = mongoose.model("Student", student);
 export default Student;
