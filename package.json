@@ -8,8 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node -r dotenv/config index.js",
     "server-dev": "nodemon -r dotenv/config index.js",
-    "start": "npm run server",
-    "dev": "npm run server-dev"
+    "client": "npm run start --prefix client",
+    "build": "npm run build --prefix client",
+    "install-client": "npm install --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm run install-client && npm run build",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -34,6 +38,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "concurrently": "^7.3.0",
     "nodemon": "^2.0.19"
   }
 }

@@ -6,6 +6,49 @@ import students from "./students.js";
 
 const router = Router();
 
+router.get("/", async (req, res, next) => {
+  try {
+    const { state, course } = req.query;
+    const colleges = await College.find({
+      ...(state && { state }),
+      ...(course && { courses: { $all: course } }),
+    });
+
+    res.json({ colleges });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/distribution", async (req, res, next) => {
+  try {
+    let distribution = { yearFounded: {}, state: {}, courses: {} };
+
+    const colleges = await College.find({}).lean();
+
+    colleges.forEach((college) => {
+      distribution.state[college.state] =
+        (distribution.state[college.state] || 0) + 1;
+
+      const yearFounded = new Date(college.yearFounded).getFullYear();
+      const yearBase = yearFounded - (yearFounded % 10);
+      distribution.yearFounded[
+        `${yearBase} - ${yearBase !== 2010 ? yearBase + 10 : 2012}`
+      ] =
+        (distribution.yearFounded[
+          `${yearBase} - ${yearBase !== 2010 ? yearBase + 10 : 2012}`
+        ] || 0) + 1;
+      college.courses.forEach((course) => {
+        distribution.courses[course] = (distribution.courses[course] || 0) + 1;
+      });
+    });
+
+    res.json({ distribution });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:collegeId", async (req, res, next) => {
   try {
     const { collegeId: id } = req.params;
