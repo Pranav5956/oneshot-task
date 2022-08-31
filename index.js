@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import { populate } from "./data/populateDB.js";
 import colleges from "./routes/colleges.js";
+import path from "path";
 
 const port = process.env.PORT || 5000;
 const app = express();
