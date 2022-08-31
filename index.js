@@ -3,9 +3,14 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import { populate } from "./data/populateDB.js";
 import colleges from "./routes/colleges.js";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const port = process.env.PORT || 5000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
