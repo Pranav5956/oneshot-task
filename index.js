@@ -19,6 +19,16 @@ app.use("/api/colleges", colleges);
 
 app.listen(port, () => console.log(`Server started at port ${port}...`));
 
+if (
+  process.env.NODE_ENV === "production" ||
+  process.env.NODE_ENV === "staging"
+) {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
+
 mongoose.connect(process.env.MONGODB_CONNECTION_URL);
 mongoose.connection.on("connected", () =>
   console.log("Connected to MongoDB Atlas...")
