@@ -8,3 +8,8 @@ export interface College {
   numberOfStudents: number;
   courses: string[];
 }
+
+export interface SimilarCollege {
+  match: number;
+  college: College;
+}

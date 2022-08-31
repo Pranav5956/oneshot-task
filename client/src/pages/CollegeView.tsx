@@ -1,7 +1,9 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { Route, Routes, useSearchParams } from "react-router-dom";
+import CollegeViewDetails from "../components/CollegeViewDetails";
 import CollegeViewDrawer from "../components/CollegeViewDrawer";
+import StudentDetails from "../components/StudentDetails";
 import axios from "../config/axios";
 import { College } from "../types/college";
 
@@ -16,7 +18,6 @@ const CollegeView = (props: Props) => {
       const { data } = await axios.get<{ colleges: College[] }>("/colleges", {
         params: searchParams,
       });
-      console.log(data);
       setColleges(data.colleges);
     })();
   }, [searchParams]);
@@ -26,8 +27,8 @@ const CollegeView = (props: Props) => {
       <CollegeViewDrawer colleges={colleges} />
       <Routes>
         <Route
-          path=":id"
-          element={<Box sx={{ flexGrow: 1, p: 3 }}>Hello</Box>}
+          path=":collegeId/*"
+          element={<CollegeViewDetails />}
         />
       </Routes>
     </Box>

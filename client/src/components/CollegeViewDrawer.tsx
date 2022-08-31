@@ -1,10 +1,13 @@
 import {
+  Avatar,
   Box,
   Drawer,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemButton,
   ListItemText,
+  Skeleton,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -69,18 +72,35 @@ const CollegeViewDrawer = ({ colleges }: Props) => {
       </Box>
       <Box sx={{ overflow: "auto", flex: 1 }}>
         <List>
-          {colleges &&
-            colleges.map((college) => (
-              <ListItem key={college._id} disablePadding>
-                <ListItemButton onClick={() => onListItemClicked(college._id)}>
+          {colleges !== null
+            ? colleges.map((college) => (
+                <ListItem key={college._id} disablePadding>
+                  <ListItemButton
+                    onClick={() => onListItemClicked(college._id)}>
+                    <ListItemAvatar>
+                      <Avatar>{college.name.charAt(0)}</Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={college.name}
+                      primaryTypographyProps={{ color: "primary" }}
+                      secondary={`${college.city}, ${college.state}, ${college.country}`}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))
+            : new Array(10).fill(0).map((i) => (
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <Skeleton variant="circular" />
+                    </Avatar>
+                  </ListItemAvatar>
                   <ListItemText
-                    primary={college.name}
-                    primaryTypographyProps={{ color: "primary" }}
-                    secondary={`${college.city}, ${college.state}, ${college.country}`}
+                    primary={<Skeleton />}
+                    secondary={<Skeleton />}
                   />
-                </ListItemButton>
-              </ListItem>
-            ))}
+                </ListItem>
+              ))}
         </List>
       </Box>
     </Drawer>

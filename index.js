@@ -11,8 +11,11 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.post("/populate", populate);
-app.use("/colleges", colleges);
+// DANGER: do this only once to populate a database.
+// Previous data will be erased.
+app.post("/api/populate", populate);
+
+app.use("/api/colleges", colleges);
 
 app.listen(port, () => console.log(`Server started at port ${port}...`));
 

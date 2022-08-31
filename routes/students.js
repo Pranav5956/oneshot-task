@@ -6,7 +6,7 @@ const router = Router({ mergeParams: true });
 router.get("/", async (req, res, next) => {
   try {
     const { collegeId } = req.params;
-    const students = await Student.find({ collegeId }, { name: 1 }).lean();
+    const students = await Student.find({ collegeId }).lean();
 
     res.json({ students });
   } catch (err) {
